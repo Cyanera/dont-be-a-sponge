@@ -114,6 +114,7 @@ const App = {
     else if (c === "prev") this.prev();
     else if (c === "replay") this.replay();
     else if (c === "mute") { Sound.setMuted(!Sound.muted); document.getElementById("dock-mute").textContent = Sound.muted ? "🔇" : "🔊"; this.broadcast(); }
+    else if (c === "clean") { if (this.ctx && this.ctx.onKey) this.ctx.onKey("c"); }
     else if (c === "full") toggleFull();
     else if (c === "presenter") this.openPresenter();
     else if (c === "jump") this.goto(+arg, 0, { wipe: true });
@@ -131,6 +132,8 @@ const App = {
     const pos = document.getElementById("dock-pos");
     if (pos && this.si >= 0) pos.textContent = `${this.si + 1}.${this.bi + 1}`;
     const j = document.getElementById("dock-jump"); if (j && this.si >= 0) j.value = this.si;
+    const sqb = document.getElementById("dock-squeeze"); if (sqb) sqb.style.display = this.ctx && this.ctx.onKeyDown ? "" : "none";
+    const clb = document.getElementById("dock-clean"); if (clb) clb.style.display = this.ctx && this.ctx.onKeyDown ? "" : "none";
     if (this.presenterWin && !this.presenterWin.closed) {
       const ch = this.ctx && this.ctx.state && this.ctx.state.ch;
       const b = this.si >= 0 ? SCENES[this.si].beats[this.bi] : null;
@@ -207,6 +210,30 @@ function bootShow() {
     }
   });
   addEventListener("keyup", e => { if (App.ctx && App.ctx.onKeyUp) App.ctx.onKeyUp(e.key.toLowerCase()); });
+
+  /* ---- اللمس: نقرة = التالي · سحب = تنقّل ----
+     العناصر التفاعلية (الكاسات، الإسفنجة، بطاقات الاختيار) توقف pointerdown فلا تصل هنا. */
+  const vp = document.getElementById("viewport");
+  let tp = null;
+  vp.addEventListener("pointerdown", e => {
+    if (!App.started || e.button > 0) return;
+    tp = { x: e.clientX, y: e.clientY, t: Date.now(), id: e.pointerId };
+  });
+  vp.addEventListener("pointercancel", () => { tp = null; });
+  vp.addEventListener("pointerup", e => {
+    if (!tp || e.pointerId !== tp.id) return;
+    const dx = e.clientX - tp.x, dy = e.clientY - tp.y, dt = Date.now() - tp.t; tp = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) App.cmd(dx > 0 ? "next" : "prev");   // يمين = التالي (مثل السهم →)
+    else if (Math.abs(dx) < 15 && Math.abs(dy) < 15 && dt < 600) App.cmd("next");
+  });
+
+  // أجهزة اللمس: الشريط ظاهر دائمًا (لا فأرة تقرّبه)
+  const touchy = matchMedia("(hover: none), (pointer: coarse)").matches;
+  if (touchy) { document.body.classList.add("touch"); document.querySelector("#gate .gate-keys").innerHTML = "<span><b>انقري الشاشة</b> التالي</span><span><b>اسحبي يمينًا</b> التالي</span><span><b>اسحبي يسارًا</b> السابق</span><span><b>الشريط السفلي</b> الصوت · إعادة · قفز</span>"; document.getElementById("gate-presenter").style.display = "none"; }
+  const sq = document.getElementById("dock-squeeze");
+  const sqSet = on => { const c = App.ctx; if (c && (on ? c.onKeyDown : c.onKeyUp)) (on ? c.onKeyDown : c.onKeyUp)("s"); };
+  sq.addEventListener("pointerdown", e => { e.stopPropagation(); e.preventDefault(); sq.setPointerCapture(e.pointerId); sqSet(true); });
+  ["pointerup", "pointercancel"].forEach(ev => sq.addEventListener(ev, () => sqSet(false)));
 
   // المؤشر يختفي عند السكون، والشريط يظهر عند الاقتراب من أسفل الشاشة
   let idle; const dock = document.getElementById("dock");

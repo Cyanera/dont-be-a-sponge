@@ -73,6 +73,12 @@ html, body {
   user-select: none; -webkit-user-select: none;
 }
 body.hide-cursor, body.hide-cursor * { cursor: none !important; }
+#viewport { touch-action: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+/* أجهزة اللمس: شريط ظاهر دائمًا في الوسط، وأزرار أكبر */
+body.touch #dock { left: 50%; bottom: max(10px, env(safe-area-inset-bottom)); transform: translateX(-50%); opacity: .55; pointer-events: auto; }
+body.touch #dock:active, body.touch #dock:focus-within { opacity: 1; }
+body.touch #dock button, body.touch #dock select { min-width: 52px; height: 52px; }
+body.touch #dock [data-cmd="full"], body.touch #dock [data-cmd="presenter"] { display: none; }
 
 #viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
 #stage {
