@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لا تكن إسفنجة!</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- شاشة العرض للأطفال -->
+  <div id="viewport">
+    <div id="stage"></div>
+    <div id="wipe" aria-hidden="true"></div>
+  </div>
+
+  <!-- شاشة البداية (تختفي بعد أول ضغطة) -->
+  <div id="gate">
+    <div class="gate-card">
+      <div class="gate-title">لا تكن إسفنجة!</div>
+      <div class="gate-sub">تجربة تفاعلية لأطفال الروضة</div>
+      <button id="gate-start" class="gate-btn">ابدئي العرض ▶</button>
+      <div class="gate-row">
+        <button id="gate-presenter" class="gate-link">فتح نافذة المقدِّمة (P)</button>
+        <a class="gate-link" href="#guide" target="_blank">دليل المقدِّمة للطباعة</a>
+      </div>
+      <div class="gate-keys">
+        <span><b>مسافة / → / الريموت</b> التالي</span>
+        <span><b>←</b> السابق</span>
+        <span><b>١ / ٢</b> اختيار الأطفال</span>
+        <span><b>R</b> أعيدي هذه اللحظة</span>
+        <span><b>M</b> الصوت</span>
+        <span><b>P</b> نافذة المقدِّمة</span>
+      </div>
+      <div class="gate-font" id="font-status"></div>
+    </div>
+  </div>
+
+  <!-- شريط تحكّم خفي: يظهر فقط عند تحريك الفأرة إلى أسفل الشاشة -->
+  <div id="dock">
+    <button data-cmd="prev" title="السابق">‹</button>
+    <span id="dock-pos">1/1</span>
+    <button data-cmd="next" title="التالي">›</button>
+    <button data-cmd="replay" title="إعادة المشهد">↺</button>
+    <button data-cmd="mute" id="dock-mute" title="الصوت">🔊</button>
+    <button data-cmd="full" title="ملء الشاشة">⛶</button>
+    <button data-cmd="presenter" title="نافذة المقدِّمة">📝</button>
+    <select id="dock-jump" title="انتقال إلى مشهد"></select>
+  </div>
+
+  <!-- وضع المقدِّمة / الدليل (يُبنى بالـ JS عند #presenter أو #guide) -->
+  <div id="presenter-root"></div>
+
+  <script src="js/engine.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/scenes-a.js"></script>
+  <script src="js/scenes-b.js"></script>
+  <script src="js/scenes-c.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
