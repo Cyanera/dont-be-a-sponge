@@ -114,6 +114,7 @@ const App = {
     else if (c === "prev") this.prev();
     else if (c === "replay") this.replay();
     else if (c === "mute") { Sound.setMuted(!Sound.muted); document.getElementById("dock-mute").textContent = Sound.muted ? "🔇" : "🔊"; this.broadcast(); }
+    else if (c === "clean") { if (this.ctx && this.ctx.onKey) this.ctx.onKey("c"); }
     else if (c === "full") toggleFull();
     else if (c === "presenter") this.openPresenter();
     else if (c === "jump") this.goto(+arg, 0, { wipe: true });
@@ -132,6 +133,7 @@ const App = {
     if (pos && this.si >= 0) pos.textContent = `${this.si + 1}.${this.bi + 1}`;
     const j = document.getElementById("dock-jump"); if (j && this.si >= 0) j.value = this.si;
     const sqb = document.getElementById("dock-squeeze"); if (sqb) sqb.style.display = this.ctx && this.ctx.onKeyDown ? "" : "none";
+    const clb = document.getElementById("dock-clean"); if (clb) clb.style.display = this.ctx && this.ctx.onKeyDown ? "" : "none";
     if (this.presenterWin && !this.presenterWin.closed) {
       const ch = this.ctx && this.ctx.state && this.ctx.state.ch;
       const b = this.si >= 0 ? SCENES[this.si].beats[this.bi] : null;
