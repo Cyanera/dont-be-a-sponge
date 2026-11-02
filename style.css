@@ -6,45 +6,45 @@
   font-weight: 400;
   font-display: block;
   src: local("Thmanyah Sans"), local("ThmanyahSans-Regular"), local("thmanyahsans-Regular"),
-       url("../fonts/thmanyah-regular.woff2") format("woff2"),
-       url("../fonts/thmanyah-regular.otf") format("opentype"),
-       url("../fonts/thmanyah-regular.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Regular.otf") format("opentype"),
-       url("../fonts/thmanyahsans-Regular.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Regular.woff2") format("woff2");
+       url("thmanyah-regular.woff2") format("woff2"),
+       url("thmanyah-regular.otf") format("opentype"),
+       url("thmanyah-regular.ttf") format("truetype"),
+       url("thmanyahsans-Regular.otf") format("opentype"),
+       url("thmanyahsans-Regular.ttf") format("truetype"),
+       url("thmanyahsans-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Thmanyah";
   font-weight: 700;
   font-display: block;
   src: local("Thmanyah Sans Bold"), local("ThmanyahSans-Bold"), local("thmanyahsans-Bold"),
-       url("../fonts/thmanyah-bold.woff2") format("woff2"),
-       url("../fonts/thmanyah-bold.otf") format("opentype"),
-       url("../fonts/thmanyah-bold.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Bold.otf") format("opentype"),
-       url("../fonts/thmanyahsans-Bold.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Bold.woff2") format("woff2");
+       url("thmanyah-bold.woff2") format("woff2"),
+       url("thmanyah-bold.otf") format("opentype"),
+       url("thmanyah-bold.ttf") format("truetype"),
+       url("thmanyahsans-Bold.otf") format("opentype"),
+       url("thmanyahsans-Bold.ttf") format("truetype"),
+       url("thmanyahsans-Bold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Thmanyah";
   font-weight: 900;
   font-display: block;
   src: local("Thmanyah Sans Black"), local("ThmanyahSans-Black"), local("thmanyahsans-Black"),
-       url("../fonts/thmanyah-black.woff2") format("woff2"),
-       url("../fonts/thmanyah-black.otf") format("opentype"),
-       url("../fonts/thmanyah-black.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Black.otf") format("opentype"),
-       url("../fonts/thmanyahsans-Black.ttf") format("truetype"),
-       url("../fonts/thmanyahsans-Black.woff2") format("woff2"),
+       url("thmanyah-black.woff2") format("woff2"),
+       url("thmanyah-black.otf") format("opentype"),
+       url("thmanyah-black.ttf") format("truetype"),
+       url("thmanyahsans-Black.otf") format("opentype"),
+       url("thmanyahsans-Black.ttf") format("truetype"),
+       url("thmanyahsans-Black.woff2") format("woff2"),
        /* إن لم يتوفر الوزن الأثقل نستخدم العريض */
-       local("Thmanyah Sans Bold"), url("../fonts/thmanyah-bold.otf") format("opentype"),
-       url("../fonts/thmanyah-bold.ttf") format("truetype");
+       local("Thmanyah Sans Bold"), url("thmanyah-bold.otf") format("opentype"),
+       url("thmanyah-bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "KufiFallback";
   font-weight: 100 900;
   font-display: block;
-  src: url("../fonts/NotoKufiArabic.ttf") format("truetype");
+  src: url("NotoKufiArabic.ttf") format("truetype");
 }
 
 :root {

@@ -53,7 +53,7 @@ function clipVideo(ctx) {
 }
 function clipSrc(v, file) {
   const mp4 = v.canPlayType('video/mp4; codecs="avc1.4D401F"') || v.canPlayType("video/mp4");
-  return `videos/${file}.${mp4 ? "mp4" : "webm"}`;
+  return `${file}.${mp4 ? "mp4" : "webm"}`;
 }
 /* يعرض آخر لقطة من مقطع ويتوقف عندها (لحظة القرار) */
 function freezeClip(ctx, file) {
